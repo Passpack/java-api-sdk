@@ -36,6 +36,18 @@ The Passpack SDK provides the following features:
 ## Installation and Usage
 The Passpack SDK is currently only available in the Java language, and it must be requested via the Passpack support team. The library is provided as a JAR file that can be included in your project.
 
+
+### Installation
+Install into your code base by adding the following into your maven `pom.xml` file:
+
+```xml
+<dependency>
+  <groupId>com.passpack.api</groupId>
+  <artifactId>java-api-sdk</artifactId>
+  <version>${passpack.sdk.version}</version>
+</dependency>
+```
+
 ### Pre-requisites
 - To obtain an API key you must be the organization owner
 - You must have a valid Passpack account and current subscription
