@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <name>java-api-sdk</name>
+    <artifactId>java-api-sdk</artifactId>
+    <groupId>com.passpack.api</groupId>
+    <version>11.0.2</version>
+    <packaging>jar</packaging>
+
+
+
+    <description>This is the public SDK intended to speed the integration of the Passpack API into customer environments.</description>
+    <url>https://github.com/Passpack/java-api-sdk</url>
+
+    <licenses>
+        <license>
+            <name>MIT license</name>
+            <url>https://opensource.org/license/mit</url>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <name>Passpack</name>
+            <email>support@passpack.com</email>
+            <organization>Passpack</organization>
+            <organizationUrl>https://www.passpack.com</organizationUrl>
+        </developer>
+    </developers>
+
+    <scm>
+        <connection>scm:git:git://github.com/Passpack/java-api-sdk.git</connection>
+        <developerConnection>scm:git:ssh://github.com:Passpack/java-api-sdk.git</developerConnection>
+        <url>http://github.com/simpligility/ossrh-demo/tree/master</url>
+    </scm>
+
+    <properties>
+        <central.publishing.maven.plugin.version>0.5.0</central.publishing.maven.plugin.version>
+        <java.version>17</java.version>
+        <java.build.version>17</java.build.version>
+        <maven.compiler.release>17</maven.compiler.release>
+        <maven.compiler.plugin.version>3.10.1</maven.compiler.plugin.version>
+        <maven.gpg.plugin.version>3.2.5</maven.gpg.plugin.version>
+        <maven.javadoc.plugin.version>3.8.0</maven.javadoc.plugin.version>
+        <maven.source.plugin.version>3.3.1</maven.source.plugin.version>
+        <maven.surefire.version>2.22.2</maven.surefire.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <gson.version>2.10.1</gson.version>
+        <httpclient5.version>5.3.1</httpclient5.version>
+        <java-api-model.version>11.0.2</java-api-model.version>
+        <junit.version>5.11.0</junit.version>
+
+        <log4j.version>2.23.1</log4j.version>
+
+        <lombok.version>1.18.32</lombok.version>
+
+    </properties>
+
+<dependencies>
+    <!-- Passpack Dependencies -->
+    <dependency>
+        <groupId>com.passpack.api</groupId>
+        <artifactId>java-api-model</artifactId>
+        <version>${java-api-model.version}</version>
+    </dependency>
+    <!-- End Passpack Dependencies -->
+
+    <dependency>
+        <groupId>org.apache.logging.log4j</groupId>
+        <artifactId>log4j-api</artifactId>
+        <version>${log4j.version}</version>
+    </dependency>
+    <dependency>
+        <groupId>org.apache.logging.log4j</groupId>
+        <artifactId>log4j-core</artifactId>
+        <version>${log4j.version}</version>
+    </dependency>
+    <dependency>
+        <groupId>com.google.code.gson</groupId>
+        <artifactId>gson</artifactId>
+        <version>${gson.version}</version>
+    </dependency>
+    <dependency>
+        <groupId>org.apache.httpcomponents.client5</groupId>
+        <artifactId>httpclient5</artifactId>
+        <version>${httpclient5.version}</version>
+    </dependency>
+    <dependency>
+        <groupId>org.junit.jupiter</groupId>
+        <artifactId>junit-jupiter-engine</artifactId>
+        <version>${junit.version}</version>
+        <scope>test</scope>
+    </dependency>
+</dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>${maven.surefire.version}</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>${maven.source.plugin.version}</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar-no-fork</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>${maven.javadoc.plugin.version}</version>
+                <configuration>
+                    <bottom>Copyright © 2024 Passpack, Inc. Licensed under the MIT license.</bottom>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>attach-javadocs</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-gpg-plugin</artifactId>
+                <version>${maven.gpg.plugin.version}</version>
+                <executions>
+                    <execution>
+                        <id>sign-artifacts</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>sign</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.sonatype.central</groupId>
+                <artifactId>central-publishing-maven-plugin</artifactId>
+                <version>${central.publishing.maven.plugin.version}</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <publishingServerId>central</publishingServerId>
+                    <autoPublish>false</autoPublish>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven.compiler.plugin.version}</version>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                    <annotationProcessorPaths>
+                        <path>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                            <version>${lombok.version}</version>
+                        </path>
+                    </annotationProcessorPaths>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>
