@@ -52,7 +52,7 @@
         <java-api-model.version>11.0.2</java-api-model.version>
         <junit.version>5.11.0</junit.version>
 
-        <log4j.version>2.23.1</log4j.version>
+        <log4j.version>2.24.1</log4j.version>
 
         <lombok.version>1.18.32</lombok.version>
 
