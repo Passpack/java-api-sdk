@@ -55,7 +55,7 @@ public class PackingKeyOps extends APIDriven {
      */
     public static HttpResponseObject<GetKeyDataResponse> retrieve() {
         RequestOptions options = getDefaultOptions(PortalUrlPaths.ACCOUNT_KEY_DATA_PATH);
-        RequestMethod method = RequestMethod.POST;
+        RequestMethod method = RequestMethod.GET;
         Map<String, Object> queryParams = null;
         APIRequest apiRequest = new APIRequest(options, method, queryParams);
         boolean ignoreResponse = false;
