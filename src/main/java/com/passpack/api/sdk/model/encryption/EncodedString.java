@@ -6,4 +6,5 @@ public interface EncodedString {
     public String getSalt() ;
     public String getCipherText();
     public String toString();
+    public int getIterations();
 }

@@ -1,5 +1,8 @@
 package com.passpack.api.sdk.model.encryption;
 
+import com.passpack.api.sdk.encryption.AesEncryption_V5;
+import com.passpack.api.sdk.encryption.AesEncryption_V6;
+
 public class EncodedStringFactory {
 
     public static EncodedString createFromInputString(String input) throws Exception {
@@ -18,6 +21,10 @@ public class EncodedStringFactory {
 
     public static EncodedString createFromInputString(String input, String delimiter) throws Exception {
         switch (getVersion(input, delimiter)) {
+            case 6:
+                return new EncodedStringv5(input, delimiter, AesEncryption_V6.V6_ITERATIONS_DEFAULT);
+            case 5:
+                return new EncodedStringv5(input, delimiter, AesEncryption_V5.V5_ITERATIONS_DEFAULT);
             case 3:
                 return new EncodedStringv3(input, delimiter);
             case 2:

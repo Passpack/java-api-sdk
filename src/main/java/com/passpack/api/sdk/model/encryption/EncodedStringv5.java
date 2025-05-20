@@ -7,24 +7,27 @@ import lombok.Data;
 @Data
 @Builder
 @AllArgsConstructor
-public class EncodedStringv3 extends EncodedStringBaseClass implements EncodedString {
+public class EncodedStringv5 extends EncodedStringBaseClass implements EncodedString {
     private String iv;
     private String salt;
+    private int iterations;
     private String cipherText;
 
-    public EncodedStringv3(String encodedString, String delimiter) {
+    public EncodedStringv5(String encodedString, String delimiter, int iterations) {
         super();
         super.delimiter = delimiter;
         this.encodedString = encodedString;
+        this.iterations = iterations;
         parse();
     }
 
-    public EncodedStringv3(String delimiter, String iv, String salt, String cipherText) {
+    public EncodedStringv5(String delimiter, String iv, String salt, int interations, String cipherText) {
         super();
         super.delimiter = delimiter;
         this.iv = iv;
         this.salt = salt;
         this.cipherText = cipherText;
+        this.iterations = interations;
         encodedString = toString();
         parse();
     }
@@ -32,9 +35,10 @@ public class EncodedStringv3 extends EncodedStringBaseClass implements EncodedSt
     void parse() {
         parts = getParts();
         partCount = parts.length;
-        iv = partCount >= 1 ? parts[PART_IV] : null;
-        salt = partCount >= 2 ? parts[PART_SALT] : null;
-        cipherText = partCount >= 3 ? parts[PART_CIPHER_TEXT] : null;
+        iterations = partCount >= 1 ? Integer.parseInt(parts[PART_V5_ITERATIONS]) : 0;
+        iv = partCount >= 2 ? parts[PART_V5_IV] : null;
+        salt = partCount >= 3 ? parts[PART_V5_SALT] : null;
+        cipherText = partCount >= 4 ? parts[PART_V5_CIPHER_TEXT] : null;
         parsed = true;
     }
 
@@ -60,12 +64,15 @@ public class EncodedStringv3 extends EncodedStringBaseClass implements EncodedSt
     }
 
     public int getIterations() {
-        return -1;
+        if (!parsed) {
+            parse();
+        }
+        return iterations;
     }
 
     @Override
     public String toString() {
-        encodedString = "3" + delimiter + iv + delimiter + salt + delimiter + cipherText;
+        encodedString =  "5" + delimiter + iterations + delimiter + iv + delimiter + salt + delimiter + cipherText;
         return encodedString;
     }
 

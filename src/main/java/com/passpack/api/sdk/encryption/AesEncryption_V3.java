@@ -98,7 +98,7 @@ public class AesEncryption_V3 extends AesEncryptionBase {
             subArray[i - V3_PSON_HEADER_LENGTH] = plainText[i];
         }
 
-        return new String(subArray);
+        return new String(subArray).trim();
     }
 
 

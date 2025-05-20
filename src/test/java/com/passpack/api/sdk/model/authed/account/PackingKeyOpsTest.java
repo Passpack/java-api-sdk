@@ -18,5 +18,8 @@ public class PackingKeyOpsTest extends BaseAuthedTest {
     public void testRetrieveAndDecryptPackingKey() throws Exception {
         PackingKey packingKey = PackingKeyOps.retrieveAndDecryptPackingKey();
         Assertions.assertNotNull(packingKey);
+
+        // Log some values.
+        System.out.println("Decoded Private Key: " + packingKey.getDecodedPrivateKey());
     }
 }

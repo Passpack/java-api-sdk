@@ -73,7 +73,7 @@ public class AesEncryption_V2 extends AesEncryptionBase {
         cipher.init(Cipher.DECRYPT_MODE, secretKey, iv);
         byte[] plainText = cipher.doFinal(Base64.getDecoder()
                 .decode(encodedString.getCipherText()));
-        return new String(plainText);
+        return new String(plainText).trim();
     }
 
 
