@@ -14,6 +14,24 @@ public abstract class BaseAuthedTest {
 //        Passpack.apiSecret = "";
 //        Passpack.apiKey = "";
 //        Passpack.apiPackingKey = "";
+
+        // Check and see if the API settings are available in the environment
+        if (System.getenv("PASSPACK_API_KEY") != null) {
+            Passpack.apiKey = System.getenv("PASSPACK_API_KEY");
+            System.out.println("Setting API Key=" + Passpack.apiKey);
+        }
+        if (System.getenv("PASSPACK_API_SECRET") != null) {
+            Passpack.apiSecret = System.getenv("PASSPACK_API_SECRET");
+            System.out.println("Setting API Secret=<<>>");
+        }
+        if (System.getenv("PASSPACK_API_PACKING_KEY") != null) {
+            Passpack.apiPackingKey = System.getenv("PASSPACK_API_PACKING_KEY");
+            System.out.println("Setting API Packing Key=<<>>");
+        }
+        if (System.getenv("PASSPACK_API_BASE") != null) {
+            Passpack.apiBase = System.getenv("PASSPACK_API_BASE");
+            System.out.println("Setting API Base=" + Passpack.apiBase);
+        }
     }
 
     /**
@@ -24,8 +42,10 @@ public abstract class BaseAuthedTest {
     protected void assertSuccessfulPasspackResponseObject(HttpResponseObject response) throws Exception{
 
         assert response != null;
+        int apiStatusCode = response.getReturnObject().getStatus().getCode();
+        System.out.println("--------------------------- Begin Response API Code: " + apiStatusCode + " ---------------------------");
         System.out.println(objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(response));
 
-        assert response.getReturnObject().getStatus().getCode() ==0;
+        assert apiStatusCode == 0;
     }
 }

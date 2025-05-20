@@ -51,6 +51,7 @@ public abstract class AesEncryptionBase {
 
         // Get the byte count which is the result dropping the decimal part of the byte count
         int byteCount = (int) Math.floor(byteCountD);
+
         int[] bytes = new int[byteCount];
         int j = 0;
         for (int i = 0; i < byteCount; i += 3) {
@@ -70,7 +71,7 @@ public abstract class AesEncryptionBase {
 
             bytes[i] = chr1;
             if ((i + 1 < byteCount) && enc3 != 64) bytes[i + 1] = chr2;
-            if ((i + 1 < byteCount) && enc4 != 64) bytes[i + 2] = chr3;
+            if ((i + 2 < byteCount) && enc4 != 64) bytes[i + 2] = chr3;
         }
 
         // convert the input to byte array

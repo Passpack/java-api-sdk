@@ -18,21 +18,21 @@ public class TeamOpsTest extends BaseAuthedTest {
     @Test
     public void getGroupDetail() throws Exception {
         GroupDetailRequest request = GroupDetailRequest.builder().id(36235).build();
-        HttpResponseObject<GroupDetailResponse> response = TeamOps.groupDetail(request);
+        HttpResponseObject<GroupDetailResponse> response = TeamOps.teamDetail(request);
         assertSuccessfulPasspackResponseObject(response);
     }
 
     @Test
     public void removeGroupMemberTest() throws Exception {
         RemoveConnectionFromPasswordGroupRequest request = RemoveConnectionFromPasswordGroupRequest.builder().groupIds(Arrays.asList(36235l)).otherId(33016).build();
-        HttpResponseObject<RemoveConnectionFromPasswordGroupResponse> response = TeamOps.removeGroupMember(request);
+        HttpResponseObject<RemoveConnectionFromPasswordGroupResponse> response = TeamOps.removeTeamMember(request);
         assertSuccessfulPasspackResponseObject(response);
     }
 
     @Test
-    public void deletePasswordGroup() throws Exception {
+    public void deleteTeamTest() throws Exception {
         DeleteGroupRequest request = DeleteGroupRequest.builder().id(763507).build();
-        HttpResponseObject<DeleteGroupResponse> response = TeamOps.deleteGroup(request);
+        HttpResponseObject<DeleteGroupResponse> response = TeamOps.deleteTeam(request);
         assertSuccessfulPasspackResponseObject(response);
     }
 }

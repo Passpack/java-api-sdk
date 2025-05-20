@@ -58,10 +58,14 @@ public class EncodedStringv2 extends EncodedStringBaseClass implements EncodedSt
         }
         return cipherText;
     }
+    public int getIterations() {
+        return -1;
+    }
 
     @Override
     public String toString() {
-        return "2" + delimiter + iv + delimiter + salt + delimiter + cipherText;
+        encodedString =  "2" + delimiter + iv + delimiter + salt + delimiter + cipherText;
+        return encodedString;
     }
 
 
